@@ -2,22 +2,22 @@ import Head from 'next/head';
 import { useState, useLayoutEffect } from 'react';
 
 const Home = () => {
-  const titleWords = ['Web 3.0:', 'Research.', 'Develop.', 'Ship.'];
-  const initialWordIdx = -1;
+  const wordAnimationDurationInMs = 2000;
+  const titleWords = ['Explore.', 'Develop.', 'Ship.'];
   let titleInterval = null;
 
-  const [highlightedWordIdx, setHighlightedWordIdx] = useState(initialWordIdx);
+  const [highlightedWordIdx, setHighlightedWordIdx] = useState(0);
 
   useLayoutEffect(() => {
     titleInterval = setInterval(() => {
       let nextIdxToHighlight = highlightedWordIdx + 1;
 
       if (highlightedWordIdx > titleWords.length) {
-        nextIdxToHighlight = initialWordIdx;
+        nextIdxToHighlight = -1;
       }
 
       setHighlightedWordIdx(nextIdxToHighlight);
-    }, 3000);
+    }, wordAnimationDurationInMs);
 
     return () => clearInterval(titleInterval);
   }, [titleWords, titleInterval]);
@@ -26,24 +26,32 @@ const Home = () => {
     <div className="container">
       <Head>
         <title>
-          Research. Develop. Ship. Web 3.0 for the best blockchain teams |
-          Atomik Labs
+          Explore. Develop. Ship. Web 3.0 solutions for the best blockchain
+          teams and decentralised systems | Atomik Labs
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <header>
+        <p>
+          <img src="/logo.png" alt="Atomik Labs logo" /> Atomik Labs
+        </p>
+      </header>
 
       <main>
         <h1 className="title">
           {titleWords.map((word, idx) => (
-            <span className={ idx === highlightedWordIdx ? 'animated' : ''} key={word+idx}>{word}</span>
+            <span
+              className={idx === highlightedWordIdx ? 'animated' : ''}
+              key={word + idx}
+            >
+              {word}
+            </span>
           ))}
         </h1>
       </main>
 
       <footer>
-        <p>
-          <img src="/logo.png" alt="Atomik Labs logo" /> Atomik Labs
-        </p>
+        <p>Web 3.0: blockchain &amp; decentralised systems.</p>
       </footer>
 
       <style jsx>{`
@@ -52,6 +60,28 @@ const Home = () => {
           padding: 0 0.5rem;
           display: flex;
           flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        header {
+          display: flex;
+          width: 100%;
+          justify-content: flex-start;
+          font-weight: 600;
+          font-size: 1.25rem;
+          position: sticky;
+          top: 0;
+        }
+
+        header img {
+          max-height: 3rem;
+          vertical-align: middle;
+          margin-left: 0.5rem;
+        }
+
+        header a {
+          display: flex;
           justify-content: center;
           align-items: center;
         }
@@ -70,18 +100,6 @@ const Home = () => {
           width: 100%;
           height: 100px;
           border-top: 1px solid #eaeaea;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-
-        footer img {
-          max-height: 3rem;
-          vertical-align: middle;
-          margin-left: 0.5rem;
-        }
-
-        footer a {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -110,12 +128,12 @@ const Home = () => {
           line-height: 1.15;
         }
 
-        .title span { 
+        .title span {
           display: inline-block;
         }
 
         h1 {
-          font-size: 4rem;
+          font-size: 5rem;
         }
 
         h2 {
@@ -187,7 +205,8 @@ const Home = () => {
         }
 
         @media (max-width: 600px) {
-          .grid, .title {
+          .grid,
+          .title {
             width: 100%;
             flex-direction: column;
           }
@@ -198,7 +217,7 @@ const Home = () => {
           background-image: linear-gradient(92deg, #f35626, #feab3a);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
-          animation: hue 3s infinite linear;
+          animation: hue ${wordAnimationDurationInMs / 1000}s infinite linear;
         }
 
         @keyframes hue {
@@ -219,6 +238,7 @@ const Home = () => {
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
+          font-size: 16px;
         }
 
         * {
