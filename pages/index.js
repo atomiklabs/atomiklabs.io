@@ -1,15 +1,22 @@
 import Head from 'next/head';
-import { useState, useLayoutEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const Home = () => {
-  const wordAnimationDurationInMs = 2000;
+  const wordAnimationDurationInMs = 3000;
   const titleWords = ['Explore.', 'Develop.', 'Ship.'];
   let titleInterval = null;
 
   const [highlightedWordIdx, setHighlightedWordIdx] = useState(0);
+  const [isTitleIntervalSuspended, setIsTitleIntervalSuspended] = useState(
+    false,
+  );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     titleInterval = setInterval(() => {
+      if (isTitleIntervalSuspended) {
+        return;
+      }
+
       let nextIdxToHighlight = highlightedWordIdx + 1;
 
       if (highlightedWordIdx > titleWords.length) {
@@ -20,7 +27,7 @@ const Home = () => {
     }, wordAnimationDurationInMs);
 
     return () => clearInterval(titleInterval);
-  }, [titleWords, titleInterval]);
+  }, [titleWords, titleInterval, isTitleIntervalSuspended, highlightedWordIdx]);
 
   return (
     <div className="container">
@@ -40,15 +47,46 @@ const Home = () => {
       <main>
         <h1 className="title">
           {titleWords.map((word, idx) => (
-            <span
-              className={idx === highlightedWordIdx ? 'animated' : ''}
+            <a
+              onMouseEnter={() => {
+                setIsTitleIntervalSuspended(true);
+                setHighlightedWordIdx(idx);
+              }}
+              onMouseLeave={() => {
+                setIsTitleIntervalSuspended(false);
+                setHighlightedWordIdx(idx);
+              }}
+              href={`#${word}`}
+              className={
+                !isTitleIntervalSuspended && idx === highlightedWordIdx
+                  ? 'animated'
+                  : ''
+              }
               key={word + idx}
             >
               {word}
-            </span>
+            </a>
           ))}
         </h1>
       </main>
+
+      <article>
+        <section id={titleWords[0]} className="card">
+          <h2>{titleWords[0]}</h2>
+          <p>
+            We are happy to share our expertise with you. You can learn about
+            the blockchain and decentralised systems. You will find us
+            describing various problems of different levels (basic, moderate,
+            advanced).
+          </p>
+        </section>
+        <section id={titleWords[1]} className="card">
+          <h2>{titleWords[1]}</h2>
+        </section>
+        <section id={titleWords[2]} className="card">
+          <h2>{titleWords[2]}</h2>
+        </section>
+      </article>
 
       <footer>
         <p>Web 3.0: blockchain &amp; decentralised systems.</p>
@@ -72,6 +110,9 @@ const Home = () => {
           font-size: 1.25rem;
           position: sticky;
           top: 0;
+          background: #fff;
+          z-index: 50;
+          box-shadow: 0 0 2rem 0 #fff;
         }
 
         header img {
@@ -87,8 +128,8 @@ const Home = () => {
         }
 
         main {
-          padding: 5rem 0;
-          flex: 1;
+          margin-top: -5.5rem;
+          flex: 1 1 100vh;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -137,7 +178,7 @@ const Home = () => {
         }
 
         h2 {
-          font-size: 3rem;
+          font-size: 4rem;
         }
 
         .title img {
@@ -193,7 +234,7 @@ const Home = () => {
           border-color: #0070f3;
         }
 
-        .card h3 {
+        .card h2 {
           margin: 0 0 1rem 0;
           font-size: 1.5rem;
         }
@@ -212,12 +253,17 @@ const Home = () => {
           }
         }
 
-        .animated {
+        .animated,
+        main a:hover {
           color: #f35626;
           background-image: linear-gradient(92deg, #f35626, #feab3a);
           -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          // -webkit-text-fill-color: transparent;
           animation: hue ${wordAnimationDurationInMs / 1000}s infinite linear;
+        }
+
+        main a:hover {
+          text-decoration: underline;
         }
 
         @keyframes hue {
@@ -225,7 +271,7 @@ const Home = () => {
             filter: hue-rotate(0deg);
           }
           to {
-            filter: hue-rotate(-180deg);
+            filter: hue-rotate(-360deg);
           }
         }
       `}</style>
