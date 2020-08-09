@@ -1,42 +1,42 @@
-import Head from 'next/head';
-import { useState, useEffect } from 'react';
+import Head from 'next/head'
+import { useState, useEffect } from 'react'
+import { ContactForm } from '../components/contact-form'
 
 const Home = () => {
-  const wordAnimationDurationInMs = 3000;
-  const titleWords = ['Explore.', 'Develop.', 'Ship.'];
-  let titleInterval = null;
+  const wordAnimationDurationInMs = 3000
+  const titleWords = ['Explore.', 'Develop.', 'Ship.']
+  let titleInterval = null
 
-  const [highlightedWordIdx, setHighlightedWordIdx] = useState(0);
-  const [isTitleIntervalSuspended, setIsTitleIntervalSuspended] = useState(
-    false,
-  );
+  const [highlightedWordIdx, setHighlightedWordIdx] = useState(0)
+  const [isTitleIntervalSuspended, setIsTitleIntervalSuspended] = useState(false)
 
   useEffect(() => {
     titleInterval = setInterval(() => {
       if (isTitleIntervalSuspended) {
-        return;
+        return
       }
 
-      let nextIdxToHighlight = highlightedWordIdx + 1;
+      let nextIdxToHighlight = highlightedWordIdx + 1
 
       if (highlightedWordIdx > titleWords.length) {
-        nextIdxToHighlight = -1;
+        nextIdxToHighlight = -1
       }
 
-      setHighlightedWordIdx(nextIdxToHighlight);
-    }, wordAnimationDurationInMs);
+      setHighlightedWordIdx(nextIdxToHighlight)
+    }, wordAnimationDurationInMs)
 
-    return () => clearInterval(titleInterval);
-  }, [titleWords, titleInterval, isTitleIntervalSuspended, highlightedWordIdx]);
+    return () => clearInterval(titleInterval)
+  }, [titleWords, titleInterval, isTitleIntervalSuspended, highlightedWordIdx])
 
   return (
     <div className="container">
       <Head>
         <title>
-          Explore. Develop. Ship. Web 3.0 solutions for the best blockchain
-          teams and decentralised systems | Atomik Labs
+          Explore. Develop. Ship. Web 3.0 solutions for the best blockchain teams and decentralised systems | Atomik
+          Labs
         </title>
         <link rel="icon" href="/favicon.ico" />
+        <script async data-uid="dea24244dd" src="https://atomik.ck.page/dea24244dd/index.js"></script>
       </Head>
       <header>
         <p>
@@ -49,19 +49,15 @@ const Home = () => {
           {titleWords.map((word, idx) => (
             <a
               onMouseEnter={() => {
-                setIsTitleIntervalSuspended(true);
-                setHighlightedWordIdx(idx);
+                setIsTitleIntervalSuspended(true)
+                setHighlightedWordIdx(idx)
               }}
               onMouseLeave={() => {
-                setIsTitleIntervalSuspended(false);
-                setHighlightedWordIdx(idx);
+                setIsTitleIntervalSuspended(false)
+                setHighlightedWordIdx(idx)
               }}
               href={`#${word}`}
-              className={
-                !isTitleIntervalSuspended && idx === highlightedWordIdx
-                  ? 'animated'
-                  : ''
-              }
+              className={!isTitleIntervalSuspended && idx === highlightedWordIdx ? 'animated' : ''}
               key={word + idx}
             >
               {word}
@@ -74,10 +70,8 @@ const Home = () => {
         <section id={titleWords[0]} className="card">
           <h2>{titleWords[0]}</h2>
           <p>
-            We are happy to share our expertise with you. You can learn about
-            the blockchain and decentralised systems. You will find us
-            describing various problems of different levels (basic, moderate,
-            advanced).
+            We are happy to share our expertise with you. You can learn about the blockchain and decentralised systems.
+            You will find us describing various problems of different levels (basic, moderate, advanced).
           </p>
         </section>
         <section id={titleWords[1]} className="card">
@@ -87,6 +81,8 @@ const Home = () => {
           <h2>{titleWords[2]}</h2>
         </section>
       </article>
+
+      <ContactForm />
 
       <footer>
         <p>Web 3.0: blockchain &amp; decentralised systems.</p>
@@ -201,8 +197,8 @@ const Home = () => {
           border-radius: 5px;
           padding: 0.75rem;
           font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+          font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,
+            Courier New, monospace;
         }
 
         .grid {
@@ -281,9 +277,8 @@ const Home = () => {
         body {
           padding: 0;
           margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans,
+            Droid Sans, Helvetica Neue, sans-serif;
           font-size: 16px;
         }
 
@@ -292,7 +287,7 @@ const Home = () => {
         }
       `}</style>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
