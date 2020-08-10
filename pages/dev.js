@@ -2,31 +2,10 @@ import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import { ContactForm } from '../components/contact-form'
 
-const Home = () => {
+const Dev = () => {
   const wordAnimationDurationInMs = 3000
   const titleWords = ['Explore.', 'Develop.', 'Ship.']
-  let titleInterval = null
 
-  const [highlightedWordIdx, setHighlightedWordIdx] = useState(0)
-  const [isTitleIntervalSuspended, setIsTitleIntervalSuspended] = useState(false)
-
-  useEffect(() => {
-    titleInterval = setInterval(() => {
-      if (isTitleIntervalSuspended) {
-        return
-      }
-
-      let nextIdxToHighlight = highlightedWordIdx + 1
-
-      if (highlightedWordIdx > titleWords.length) {
-        nextIdxToHighlight = -1
-      }
-
-      setHighlightedWordIdx(nextIdxToHighlight)
-    }, wordAnimationDurationInMs)
-
-    return () => clearInterval(titleInterval)
-  }, [titleWords, titleInterval, isTitleIntervalSuspended, highlightedWordIdx])
 
   return (
     <div className="container">
@@ -46,26 +25,17 @@ const Home = () => {
 
       <main>
         <h1 className="title">
-          {titleWords.map((word, idx) => (
-            <a
-              onMouseEnter={() => {
-                setIsTitleIntervalSuspended(true)
-                setHighlightedWordIdx(idx)
-              }}
-              onMouseLeave={() => {
-                setIsTitleIntervalSuspended(false)
-                setHighlightedWordIdx(idx)
-              }}
-              href={`#${word}`}
-              className={!isTitleIntervalSuspended && idx === highlightedWordIdx ? 'animated' : ''}
-              key={word + idx}
-            >
-              {word}
-            </a>
-          ))}
+          Dev
         </h1>
-        <h4>... Soon ...</h4>
       </main>
+
+
+
+      <ContactForm />
+
+      <footer>
+        <p>Web 3.0: blockchain &amp; decentralised systems.</p>
+      </footer>
 
       <style jsx>{`
         .container {
@@ -269,4 +239,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Dev
