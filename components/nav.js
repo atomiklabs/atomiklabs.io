@@ -1,0 +1,27 @@
+import React from 'react'
+import SVGAtomik from '../public/images/atomik.svg'
+
+export const Nav = (props) => {
+  const { isNav, setNav, scrollToWork, scrollToHire, scrollToAbout } = props
+
+  return (
+    <div className="enavbar">
+      <div className="enavbar-header">
+        <div className="enavbar-header-mobile-flex"></div>
+        <SVGAtomik tabIndex='0' className="enavbar-header-logo" height='60px' width='60px' />
+        <button className="enavbar-header-toggle" onClick={() => setNav(!isNav)}>
+          <div className={`enavbar-header-toggle-icon ${isNav ? 'enavbar-header-toggle-icon--opened' : ''}`}>
+            <i></i><i></i><i></i>
+          </div>
+        </button>
+      </div>
+      <nav className={`enavbar-nav ${isNav ? 'enavbar-nav--opened' : ''}`}>
+        <ul>
+          <li><span onClick={scrollToWork}>Work</span></li>
+          <li><span onClick={scrollToHire}>Contact</span></li>
+          <li><span onClick={scrollToAbout}>About</span></li>
+        </ul>
+      </nav>
+    </div>
+  )
+}

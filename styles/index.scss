@@ -1,0 +1,235 @@
+@font-face {
+  font-family: 'Varela Round';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(varela-round.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+$old-font-face: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$new-font-face: "Varela Round", $old-font-face;
+
+body {
+  font-family: $new-font-face;
+}
+
+a {
+  color: #000;
+
+  &:focus, &:hover {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+.page-container {
+  margin-bottom: 2vw;
+  margin-top: 2vw;
+}
+
+// ------ Intro ------
+.intro {
+  margin-bottom: 38vh;
+  margin-top: 24vh;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    margin-bottom: 23vh;
+    margin-top: 18vh;
+  }
+}
+
+.intro > h1 {
+  font-size: 3em;
+  font-weight: 900;
+  line-height: 1.3em;
+
+  @media (min-width: 768px) {
+    font-size: 4.33vw;
+  }
+}
+
+.intro-text-top {
+  margin-bottom: 3rem;
+}
+
+// ------ Intro Extra ------
+.intro-extra {
+  animation: opacity 6s;
+  color: #333;
+  font-size: 0.9rem;
+  left: 50%;
+  margin-top: 5rem;
+  position: absolute;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  width: 90%;
+  word-break: break-word;
+
+  @media (min-width: 768px) {
+    margin-top: 0;
+    transform: translate(0%, -10%) rotate(-23deg);
+    width: auto;
+    word-break: normal;
+  }
+}
+
+.intro-extra > p {
+  margin-bottom: 0.4rem;
+}
+
+// ------ Work ------
+.work-card {
+  align-items: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  justify-content: center;
+  text-align: center;
+
+  &--atomik { background-color: #000; }
+
+  &:hover, &:active {
+    .work-card-title {
+      opacity: 1;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    .work-card-icon {
+      animation: scale 1s linear;
+      opacity: 0.3;
+      transition: opacity 0.5s ease-in-out;
+    }
+  }
+}
+
+.work-card-icon {
+  fill: #fff;
+  height: 100%;
+  opacity: 0.3;
+  transition: opacity 0.5s ease-in-out;
+  width: 25%;
+
+  @media (min-width: 768px) {
+    opacity: 1;
+    width: 20%;
+  }
+}
+
+.work-card-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  opacity: 1;
+  position: absolute;
+  transition: opacity 0.5s ease-in-out;
+
+  @media (min-width: 768px) {
+    font-size: 2.8vw;
+    opacity: 0;
+  }
+}
+
+// ------ About ------
+.about {
+  margin-top: 8vh;
+}
+
+.about-profile {
+  border-radius: 50%;
+  height: 150px;
+  margin: 1.5rem auto;
+  overflow: hidden;
+  width: 150px;
+}
+
+.about-profile-img {
+  height: 100%;
+}
+
+.about > h1 {
+  margin-bottom: 1rem;
+  margin: 0;
+  text-align: center;
+}
+
+.about > p {
+ font-size: 1.1rem;
+}
+
+.about > p > strong {
+ font-size: 1.2rem;
+}
+
+.about > ul > li {
+  line-height: 2rem;
+}
+
+.about a {
+  padding: 0 3px;
+}
+
+.about-email {
+  font-size: 1.3rem;
+}
+
+.about-resume {
+  font-size: 0.9rem !important;
+  font-style: italic;
+}
+
+.about-resume > a {
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.about-social {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.about-social-icon {
+  fill: #000;
+  height: 29px;
+  margin: 0 0.9em;
+  width: 29px;
+
+  &:hover, &:active {
+    animation: scale 1s linear;
+  }
+}
+
+// ------ Footer ------
+.footer {
+  font-weight: 100;
+  margin-bottom: 5rem;
+  margin-top: 4rem;
+  position: relative;
+  text-align: center;
+}
+
+.footer-code {
+  color: #333;
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-right: 1rem;
+  margin-top: 1rem;
+  position: absolute;
+  right: 0;
+}
+
+// ------ Animations ------
+@keyframes opacity {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+@keyframes rotate {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
+}
+@keyframes scale {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.15);}
+  100% {transform: scale(1);}
+}

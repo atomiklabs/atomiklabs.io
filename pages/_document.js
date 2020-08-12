@@ -2,9 +2,9 @@ import React from 'react'
 import Document, { Head, Main, NextScript } from 'next/document'
 
 export default class extends Document {
-  static getInitialProps({ renderPage }) {
-    const { html, head, errorHtml, chunks } = renderPage()
-    return { html, head, errorHtml, chunks }
+  static async getInitialProps({ renderPage }) {
+    const page = renderPage()
+    return { ...page }
   }
 
   render() {
