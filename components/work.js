@@ -7,7 +7,7 @@ export const Work = (props) => {
   return (
     <section ref={workRef} className="row">
       <div className="col-md-12 pr-0 pl-0">
-        <a href="https://atomiklabs.io" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/atomiklabs/defuma" target="_blank" rel="noopener noreferrer">
           <div className="work-card work-card--atomik">
             <SVGAtomik className="work-card-icon" />
             <h3 className="work-card-title">Decentralised Full Market</h3>
