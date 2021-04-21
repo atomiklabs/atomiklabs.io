@@ -24,7 +24,7 @@ export const About = (props) => {
           <a href="https://github.com/atomiklabs/" target="_blank" rel="noopener noreferrer">
             <SVGGithub className="about-social-icon" />
           </a>
-          <a href="mailto:nick@deploy.at?subject=deploy.at">
+          <a href="mailto:tomasz@kopacki.net?subject=atomiklabs.io">
             <SVGEmail className="about-social-icon" />
           </a>
         </div>
